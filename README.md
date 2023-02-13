@@ -1,3 +1,3 @@
 # Shopyle
 
-A ecommerce app built with nextjs.
+Ecommerce web app in node.js, next.js and mongodb
