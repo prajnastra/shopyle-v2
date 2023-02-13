@@ -1,6 +1,6 @@
-# client
+# server
 
-Shopyle client code.
+Shopyle server code.
 
 ### Start app
 
