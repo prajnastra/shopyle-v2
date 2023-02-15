@@ -1,3 +1,5 @@
+export * from './cloudinary'
+
 export const swaggerOptions = {
   definition: {
     openapi: '3.0.0',
