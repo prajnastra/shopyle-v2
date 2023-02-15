@@ -6,7 +6,6 @@ import {
   getProductById,
   createProduct,
   getProduct,
-  photo,
   updateProduct,
   deleteProduct,
   getAllProducts,
@@ -31,7 +30,6 @@ router.post(
 
 // read routes
 router.get('/product/:productId', getProduct)
-router.get('/product/photo/:productId', photo)
 
 //delete route
 router.delete(

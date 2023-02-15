@@ -1,11 +1,7 @@
-import _ from 'lodash'
-import fs from 'fs'
-import formidable from 'formidable'
-
-import { CallbackError } from 'mongoose'
 import { Request, Response, NextFunction } from 'express'
+import _ from 'lodash'
 
-import { Product, IProduct } from '../models'
+import { Product } from '../models'
 import { AuthRequest } from '../types'
 
 export const getProductById = (
@@ -28,46 +24,16 @@ export const getProductById = (
 }
 
 export const createProduct = (req: Request, res: Response) => {
-  let form = new formidable.IncomingForm()
+  let product = new Product(req.body)
 
-  form.parse(req, (err, fields, file) => {
+  //save to the DB
+  product.save((err, product) => {
     if (err) {
-      return res.status(400).json({
-        error: 'problem with image',
+      res.status(400).json({
+        error: 'Saving tshirt in DB failed',
       })
     }
-    //destructure the fields
-    const { name, description, price, category, stock } = fields
-
-    if (!name || !description || !price || !category || !stock) {
-      return res.status(400).json({
-        error: 'Please include all fields',
-      })
-    }
-
-    let product = new Product(fields)
-
-    //handle file here
-    if (file.photo) {
-      // if (file.photo?.size > 3000000) {
-      //   return res.status(400).json({
-      //     error: 'File size too big!',
-      //   })
-      // }
-      // product.photo.data = fs.readFileSync(file.photo.path)
-      // product.photo.contentType = file.photo.type
-    }
-    console.log(product)
-
-    //save to the DB
-    product.save((err, product) => {
-      if (err) {
-        res.status(400).json({
-          error: 'Saving tshirt in DB failed',
-        })
-      }
-      res.json(product)
-    })
+    res.json(product)
   })
 }
 
@@ -75,17 +41,6 @@ export const getProduct = (req: AuthRequest, res: Response) => {
   if (!req.product) return
 
   return res.json(req.product)
-}
-
-//middleware
-export const photo = (req: AuthRequest, res: Response, next: NextFunction) => {
-  if (!req.product || !req.product.photo.contentType) return
-
-  if (req.product.photo.data) {
-    res.set('Content-Type', req.product.photo.contentType)
-    return res.send(req.product.photo.data)
-  }
-  next()
 }
 
 // delete controllers
@@ -108,40 +63,18 @@ export const deleteProduct = (req: AuthRequest, res: Response) => {
 // delete controllers
 export const updateProduct = (req: AuthRequest, res: Response) => {
   if (!req.product) return
-  let form = new formidable.IncomingForm()
 
-  form.parse(req, (err, fields, file) => {
+  let product = req.product
+  product = _.extend(product, req.body)
+
+  //save to the DB
+  product.save((err, product) => {
     if (err) {
-      return res.status(400).json({
-        error: 'problem with image',
+      res.status(400).json({
+        error: 'Updation of product failed',
       })
     }
-
-    //updation code
-    let product = req.product
-    product = _.extend(product, fields)
-
-    //handle file here
-    if (file.photo) {
-      // if (file.photo.size > 3000000) {
-      //   return res.status(400).json({
-      //     error: 'File size too big!',
-      //   })
-      // }
-      // product.photo.data = fs.readFileSync(file.photo.path)
-      // product.photo.contentType = file.photo.type
-    }
-    // console.log(product);
-
-    //save to the DB
-    product.save((err, product) => {
-      if (err) {
-        res.status(400).json({
-          error: 'Updation of product failed',
-        })
-      }
-      res.json(product)
-    })
+    res.json(product)
   })
 }
 

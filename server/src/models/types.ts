@@ -25,10 +25,7 @@ export interface IProduct extends Document {
   category: Schema.Types.ObjectId
   stock: number
   sold: number
-  photo: {
-    data: Buffer
-    contentType: string
-  }
+  photo: string
 }
 
 export interface IProductCart extends Document {

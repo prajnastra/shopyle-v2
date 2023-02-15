@@ -36,8 +36,8 @@ const productSchema = new Schema<IProduct>(
       default: 0,
     },
     photo: {
-      data: Buffer,
-      contentType: String,
+      type: String,
+      default: '',
     },
   },
   { timestamps: true }
