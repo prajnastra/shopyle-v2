@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 
 import Navbar from '../components/Navbar'
+import Hero from '../components/Hero'
 
 const Home: NextPage = () => {
   return (
@@ -14,7 +15,7 @@ const Home: NextPage = () => {
       </Head>
       <main>
         <Navbar />
-        <h1>Hello World</h1>
+        <Hero />
       </main>
     </>
   )

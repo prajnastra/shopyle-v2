@@ -109,11 +109,17 @@ const Navbar = ({ session, signOut }: NavProps) => {
 
             {!session ? (
               <>
-                <Button fontSize={'sm'} fontWeight={400} variant={'link'}>
+                <Button
+                  rounded={'full'}
+                  fontSize={'sm'}
+                  fontWeight={400}
+                  variant={'link'}
+                >
                   <Link href="/signin">Sign In</Link>
                 </Button>
                 <Link href="/signup">
                   <Button
+                    rounded={'full'}
                     display={{ base: 'none', md: 'inline-flex' }}
                     fontSize={'sm'}
                     fontWeight={600}
@@ -125,6 +131,7 @@ const Navbar = ({ session, signOut }: NavProps) => {
               </>
             ) : (
               <Button
+                rounded={'full'}
                 fontSize={'sm'}
                 fontWeight={400}
                 colorScheme={'green'}
