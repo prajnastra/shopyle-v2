@@ -15,7 +15,7 @@ const Dashboard: NextPage<DashboardProps> = ({ session }) => {
   return (
     <>
       <Head>
-        <title>Dashboard</title>
+        <title>Shopyle: Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
