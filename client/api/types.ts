@@ -1,6 +1,5 @@
-export interface LoginPayload {
+export interface SignupPayload {
+  name: string
   email: string
   password: string
-  userType: string
-  otpType: string
 }

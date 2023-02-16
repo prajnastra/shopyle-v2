@@ -1,9 +1,7 @@
 import type { NextPage, GetServerSideProps } from 'next'
 
-import NextLink from 'next/link'
 import { getSession, signIn } from 'next-auth/react'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import swal from 'sweetalert'
 
 import {
   Flex,
@@ -13,7 +11,6 @@ import {
   Input,
   Checkbox,
   Stack,
-  Link,
   Button,
   Heading,
   FormErrorMessage,
@@ -117,6 +114,7 @@ const Signin: NextPage = () => {
                   <Button
                     type="submit"
                     colorScheme="green"
+                    size="lg"
                     isLoading={isSubmitting}
                   >
                     Sign in
