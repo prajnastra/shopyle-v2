@@ -7,12 +7,11 @@ import {
   Text,
   HStack,
   Input,
-  Image,
   IconButton,
   useColorModeValue,
 } from '@chakra-ui/react'
 
-import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
+import { FaShopify, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
 import { BiMailSend } from 'react-icons/bi'
 
 import ListHeader from './ListHeader'
@@ -21,6 +20,7 @@ import SocialButton from './SocialButton'
 const Footer = () => {
   return (
     <Box
+      mt={'4rem'}
       bg={useColorModeValue('gray.50', 'gray.900')}
       color={useColorModeValue('gray.700', 'gray.200')}
     >
@@ -31,17 +31,12 @@ const Footer = () => {
         >
           <Stack spacing={6}>
             <HStack spacing={1}>
-              <Image
-                src="/logo.png"
-                alt="Open Banking"
-                width="23px"
-                height="23px"
-              />
+              <FaShopify fontSize="1.3rem" />
               <Text color={useColorModeValue('gray.700', 'white')}>
-                Banking
+                Shopyle
               </Text>
             </HStack>
-            <Text fontSize={'sm'}>© 2022 Fintract. All rights reserved</Text>
+            <Text fontSize={'sm'}>© 2022 Shopyle. All rights reserved</Text>
             <Stack direction={'row'} spacing={6}>
               <SocialButton label={'Twitter'} href={'#'}>
                 <FaTwitter />
@@ -82,11 +77,7 @@ const Footer = () => {
                 }}
               />
               <IconButton
-                bg={'orange.500'}
-                color="white"
-                _hover={{
-                  bg: 'orange.600',
-                }}
+                colorScheme={'green'}
                 aria-label="Subscribe"
                 icon={<BiMailSend />}
               />
