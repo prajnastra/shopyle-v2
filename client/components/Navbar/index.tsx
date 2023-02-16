@@ -25,11 +25,12 @@ import MobileNav from './MobileNav'
 interface NavProps {
   signOut?: () => any
   session?: {
-    accessToken: string
+    token: string
     expires: string
     user: {
       id: string
       name: string
+      email: string
       user_type: UserTypes
     }
   } | null
