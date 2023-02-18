@@ -36,7 +36,7 @@ export const NAV_ITEMS: NavItem = {
       href: '/dashboard',
     },
     {
-      label: 'Categroy',
+      label: 'Category',
       children: [
         {
           label: 'Manage',
