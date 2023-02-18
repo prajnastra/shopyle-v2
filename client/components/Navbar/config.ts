@@ -35,6 +35,36 @@ export const NAV_ITEMS: NavItem = {
       label: 'Dashboard',
       href: '/dashboard',
     },
+    {
+      label: 'Categroy',
+      children: [
+        {
+          label: 'Manage',
+          subLabel: 'Update/Delete product categories',
+          href: '/category/manage',
+        },
+        {
+          label: 'Create',
+          subLabel: 'Create cateogries for products',
+          href: '/category/create',
+        },
+      ],
+    },
+    {
+      label: 'Products',
+      children: [
+        {
+          label: 'Manage',
+          subLabel: 'Update/Delete listed products',
+          href: '/product/manage',
+        },
+        {
+          label: 'Create',
+          subLabel: 'Add your products for sell',
+          href: '/product/create',
+        },
+      ],
+    },
   ],
   CUSTOMER: [
     {
