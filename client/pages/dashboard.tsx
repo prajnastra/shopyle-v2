@@ -30,7 +30,6 @@ interface DashboardProps {
 }
 
 const Dashboard: NextPage<DashboardProps> = ({ session }) => {
-  console.log(session)
   return (
     <>
       <Head>
