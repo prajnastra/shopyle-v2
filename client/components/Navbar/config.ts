@@ -72,8 +72,12 @@ export const NAV_ITEMS: NavItem = {
       href: '/dashboard',
     },
     {
-      label: 'Analytics',
-      href: '/analytics',
+      label: 'Products',
+      href: '/products',
+    },
+    {
+      label: 'Cart',
+      href: '/cart',
     },
   ],
 }
