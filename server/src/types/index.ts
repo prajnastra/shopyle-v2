@@ -5,6 +5,9 @@ export interface AuthRequest extends Request {
   user?: {
     _id?: string
   }
+  auth?: {
+    _id?: string
+  }
   profile?: IUser
   product?: IProduct | null
   order?: IOrder | null
