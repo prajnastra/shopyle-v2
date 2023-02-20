@@ -14,3 +14,25 @@ export interface Categories {
   createdAt: string
   updatedAt: string
 }
+
+export interface AddProductPayload {
+  name: string
+  description: string
+  price: number
+  category: string
+  stock: number
+  photo: string
+}
+
+export interface Products {
+  _id: string
+  name: string
+  description: string
+  price: number
+  category: string
+  stock: number
+  sold: number
+  photo: string
+  createdAt: string
+  updatedAt: string
+}
