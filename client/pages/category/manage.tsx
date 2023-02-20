@@ -5,7 +5,6 @@ import { useEffect } from 'react'
 import { signOut, getSession } from 'next-auth/react'
 import { useQuery, useMutation } from 'react-query'
 import { AxiosResponse, AxiosError } from 'axios'
-import swal from 'sweetalert'
 
 import {
   Button,

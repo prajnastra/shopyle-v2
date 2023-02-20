@@ -81,23 +81,14 @@ export const updateProduct = (req: AuthRequest, res: Response) => {
 //product listing
 
 export const getAllProducts = (req: AuthRequest, res: Response) => {
-  if (!req.queries) return
-  let limit = req.queries.limit ? parseInt(req.queries.limit) : 8
-  let sortBy = req.queries.sortBy ? req.queries.sortBy : '_id'
-
-  Product.find()
-    .select('-photo')
-    .populate('category')
-    .sort([[sortBy, 'asc']])
-    .limit(limit)
-    .exec((err, products) => {
-      if (err) {
-        return res.status(400).json({
-          error: 'NO product FOUND',
-        })
-      }
-      res.json(products)
-    })
+  Product.find().exec((err, products) => {
+    if (err) {
+      return res.status(400).json({
+        error: 'NO product FOUND',
+      })
+    }
+    res.json(products)
+  })
 }
 
 export const getAllUniqueCategories = (req: Request, res: Response) => {
