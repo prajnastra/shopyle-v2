@@ -9,12 +9,17 @@ import {
 } from '@chakra-ui/react'
 
 import { Products } from '../../api/types'
+import { addItemToCart } from '../../helper'
 
 interface CardProps {
   data: Products
 }
 
 const ProductCard = ({ data }: CardProps) => {
+  const addCart = () => {
+    addItemToCart(data)
+  }
+
   return (
     <Box
       role={'group'}
@@ -56,7 +61,12 @@ const ProductCard = ({ data }: CardProps) => {
         </Stack>
 
         <Stack direction={'row'} align={'center'}>
-          <Button colorScheme="green" rounded="full">
+          <Button
+            colorScheme="green"
+            rounded="full"
+            type="button"
+            onClick={() => addCart()}
+          >
             Add to cart
           </Button>
         </Stack>
