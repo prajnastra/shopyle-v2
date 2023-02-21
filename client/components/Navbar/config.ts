@@ -73,7 +73,7 @@ export const NAV_ITEMS: NavItem = {
     },
     {
       label: 'Products',
-      href: '/products',
+      href: '/product',
     },
     {
       label: 'Cart',
