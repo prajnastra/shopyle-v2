@@ -23,13 +23,15 @@ export const addItemToCart = (item: Products) => {
   return
 }
 
-export const loadCart = () => {
+export const loadCart = (): Array<ProductCartData> => {
+  if (typeof localStorage === 'undefined' || localStorage === null) return []
   if (typeof window !== undefined) {
     const data = localStorage.getItem(STORAGE_KEY)
     if (data) {
       return JSON.parse(data)
     }
   }
+  return []
 }
 
 export const removeItemFromCart = (productId: string) => {

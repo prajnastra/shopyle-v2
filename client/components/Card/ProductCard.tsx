@@ -9,10 +9,11 @@ import {
 } from '@chakra-ui/react'
 
 import { Products } from '../../api/types'
+import { ProductCart } from '../../types'
 import { addItemToCart } from '../../helper'
 
 interface CardProps {
-  data: Products
+  data: ProductCart
 }
 
 const ProductCard = ({ data }: CardProps) => {

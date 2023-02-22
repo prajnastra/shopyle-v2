@@ -16,3 +16,17 @@ export interface SessionExtended extends Session {
     user_type: UserTypes
   }
 }
+
+export interface ProductCart {
+  _id: string
+  name: string
+  description: string
+  price: number
+  category: string
+  stock: number
+  sold: number
+  photo: string
+  createdAt: string
+  updatedAt: string
+  count: number
+}
