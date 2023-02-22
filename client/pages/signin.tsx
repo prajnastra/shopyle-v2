@@ -1,5 +1,6 @@
 import type { NextPage, GetServerSideProps } from 'next'
 
+import { useRouter } from 'next/router'
 import { getSession, signIn } from 'next-auth/react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
@@ -20,6 +21,7 @@ import {
 
 import Base from '../components/Base'
 import ChakraNextLink from '../components/ChakraNextLink'
+import swal from 'sweetalert'
 
 interface Inputs {
   email: string
@@ -27,6 +29,8 @@ interface Inputs {
 }
 
 const Signin: NextPage = () => {
+  const router = useRouter()
+
   const {
     register,
     handleSubmit,
@@ -37,9 +41,15 @@ const Signin: NextPage = () => {
     const res = await signIn('credentials', {
       email: data.email,
       password: data.password,
-      callbackUrl: `/dashboard`,
+      redirect: false,
     })
-    if (res?.error) console.log(res.error)
+
+    if (res?.ok) {
+      router.push('/dashboard')
+    }
+    if (res?.error) {
+      swal('Oops', "Email & Password didn't match", 'error')
+    }
     return
   }
 
