@@ -7,18 +7,19 @@ import {
   Stack,
   Image,
 } from '@chakra-ui/react'
+import swal from 'sweetalert'
 
 import { Products } from '../../api/types'
-import { ProductCart } from '../../types'
 import { addItemToCart } from '../../helper'
 
 interface CardProps {
-  data: ProductCart
+  data: Products
 }
 
 const ProductCard = ({ data }: CardProps) => {
   const addCart = () => {
     addItemToCart(data)
+    swal('Congrats', 'Item added in cart', 'success')
   }
 
   return (

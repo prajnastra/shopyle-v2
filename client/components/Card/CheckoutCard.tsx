@@ -4,9 +4,11 @@ import {
   Text,
   Stack,
   Image,
+  Button,
 } from '@chakra-ui/react'
 
 import { ProductCart } from '../../types'
+import { removeItemFromCart } from '../../helper'
 
 interface CardProps {
   data: ProductCart
@@ -52,6 +54,19 @@ const CheckoutCard = ({ data }: CardProps) => {
         <Text textDecoration={'line-through'} color={'gray.600'}>
           ${data.price + 10}
         </Text>
+      </Stack>
+
+      <Stack justify={'center'} align={'center'}>
+        <Button
+          colorScheme="red"
+          size="sm"
+          rounded="full"
+          onClick={() => {
+            removeItemFromCart(data._id)
+          }}
+        >
+          Remove
+        </Button>
       </Stack>
     </Stack>
   )
