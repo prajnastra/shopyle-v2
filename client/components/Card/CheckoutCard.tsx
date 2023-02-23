@@ -8,13 +8,13 @@ import {
 } from '@chakra-ui/react'
 
 import { ProductCart } from '../../types'
-import { removeItemFromCart } from '../../helper'
 
 interface CardProps {
   data: ProductCart
+  removeItemFromCart: (id: string) => void
 }
 
-const CheckoutCard = ({ data }: CardProps) => {
+const CheckoutCard = ({ data, removeItemFromCart }: CardProps) => {
   return (
     <Stack
       p={3}

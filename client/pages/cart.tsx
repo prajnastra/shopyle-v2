@@ -3,6 +3,7 @@ import type { NextPage, GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import { signOut, getSession } from 'next-auth/react'
+import swal from 'sweetalert'
 
 import { Container, Button } from '@chakra-ui/react'
 
@@ -11,7 +12,7 @@ import Navbar from '../components/Navbar'
 import { CheckoutCard } from '../components/Card'
 
 import { SessionExtended, ProductCart } from '../types'
-import { loadCart } from '../helper'
+import { loadCart, removeItemFromCart } from '../helper'
 
 interface PageProps {
   session: SessionExtended
@@ -19,6 +20,13 @@ interface PageProps {
 
 const Cart: NextPage<PageProps> = ({ session }) => {
   const [products, setProducts] = useState<Array<ProductCart>>([])
+
+  // remove item from cart
+  const handleRemoveItemFromCart = (id: string) => {
+    removeItemFromCart(id)
+    setProducts((products) => products.filter((prod) => prod._id !== id))
+    swal('Congrats', 'Item removed from cart', 'success')
+  }
 
   useEffect(() => {
     const products = loadCart()
@@ -38,7 +46,11 @@ const Cart: NextPage<PageProps> = ({ session }) => {
         <Container maxW={'7xl'} mt="20">
           {products &&
             products.map((product, idx) => (
-              <CheckoutCard key={product._id + idx} data={product} />
+              <CheckoutCard
+                key={product._id + idx}
+                data={product}
+                removeItemFromCart={handleRemoveItemFromCart}
+              />
             ))}
 
           <Button colorScheme="green" m="4" rounded="full">

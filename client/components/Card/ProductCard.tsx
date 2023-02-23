@@ -1,3 +1,5 @@
+import swal from 'sweetalert'
+
 import {
   Box,
   Button,
@@ -7,7 +9,6 @@ import {
   Stack,
   Image,
 } from '@chakra-ui/react'
-import swal from 'sweetalert'
 
 import { Products } from '../../api/types'
 import { addItemToCart } from '../../helper'
