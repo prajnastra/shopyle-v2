@@ -63,3 +63,4 @@ const Card = ({
 }
 
 export default Card
+export { default as CheckoutCard } from './CheckoutCard'

@@ -4,11 +4,11 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import { signOut, getSession } from 'next-auth/react'
 
-import { Container, SimpleGrid } from '@chakra-ui/react'
+import { Container, Button } from '@chakra-ui/react'
 
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
-import ProductCard from '../components/Card/ProductCard'
+import { CheckoutCard } from '../components/Card'
 
 import { SessionExtended, ProductCart } from '../types'
 import { loadCart } from '../helper'
@@ -36,15 +36,14 @@ const Cart: NextPage<PageProps> = ({ session }) => {
         <Navbar session={session} signOut={signOut} />
 
         <Container maxW={'7xl'} mt="20">
-          <SimpleGrid
-            columns={{ base: 1, md: 3 }}
-            spacing={{ base: 5, lg: 15 }}
-          >
-            {products &&
-              products.map((product, idx) => (
-                <ProductCard key={product._id + idx} data={product} />
-              ))}
-          </SimpleGrid>
+          {products &&
+            products.map((product, idx) => (
+              <CheckoutCard key={product._id + idx} data={product} />
+            ))}
+
+          <Button colorScheme="green" m="4" rounded="full">
+            Proceed Checkout
+          </Button>
         </Container>
       </main>
 
