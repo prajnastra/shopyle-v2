@@ -5,7 +5,14 @@ import { useEffect, useState } from 'react'
 import { signOut, getSession } from 'next-auth/react'
 import swal from 'sweetalert'
 
-import { Container, Button } from '@chakra-ui/react'
+import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  Button,
+  Container,
+} from '@chakra-ui/react'
 
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
@@ -43,7 +50,13 @@ const Cart: NextPage<PageProps> = ({ session }) => {
       <main>
         <Navbar session={session} signOut={signOut} />
 
-        <Container maxW={'7xl'} mt="20">
+        <Container maxW={'7xl'} mt="20" minH={'500px'}>
+          {(!products || products.length === 0) && (
+            <Alert status="info">
+              <AlertIcon />
+              Your cart is empty
+            </Alert>
+          )}
           {products &&
             products.map((product, idx) => (
               <CheckoutCard
@@ -53,9 +66,11 @@ const Cart: NextPage<PageProps> = ({ session }) => {
               />
             ))}
 
-          <Button colorScheme="green" m="4" rounded="full">
-            Proceed Checkout
-          </Button>
+          {products && products.length !== 0 && (
+            <Button colorScheme="green" m="4" rounded="full">
+              Proceed Checkout
+            </Button>
+          )}
         </Container>
       </main>
 
