@@ -5,14 +5,7 @@ import { useEffect, useState } from 'react'
 import { signOut, getSession } from 'next-auth/react'
 import swal from 'sweetalert'
 
-import {
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-  Button,
-  Container,
-} from '@chakra-ui/react'
+import { Alert, AlertIcon, Button, Container } from '@chakra-ui/react'
 
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
