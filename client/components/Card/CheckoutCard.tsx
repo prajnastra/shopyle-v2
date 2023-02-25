@@ -18,7 +18,7 @@ const CheckoutCard = ({ data, removeItemFromCart }: CardProps) => {
   return (
     <Stack
       p={3}
-      m={4}
+      mb={4}
       w={'full'}
       bg={useColorModeValue('white', 'gray.800')}
       boxShadow={'2xl'}

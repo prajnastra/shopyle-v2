@@ -9,6 +9,7 @@ import {
   getAllOrders,
   getOrderStatus,
   updateStatus,
+  stripeCheckout,
 } from '../controllers/order'
 
 const router = express.Router()
@@ -23,6 +24,7 @@ router.post(
   '/order/create/:userId',
   isSignedIn,
   isAuthenticated,
+  stripeCheckout,
   pushOrderInPurchaseList,
   updateStock,
   createOrder

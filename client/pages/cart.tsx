@@ -1,24 +1,40 @@
 import type { NextPage, GetServerSideProps } from 'next'
 
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { signOut, getSession } from 'next-auth/react'
+import { useMutation } from 'react-query'
+import { AxiosResponse, AxiosError } from 'axios'
 import swal from 'sweetalert'
 
 import { Alert, AlertIcon, Button, Container } from '@chakra-ui/react'
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
-import { CheckoutCard } from '../components/Card'
+import Card, { CheckoutCard } from '../components/Card'
 
+import { addOrderAPI } from '../api'
+import { loadCart, removeItemFromCart, cartEmpty } from '../helper'
 import { SessionExtended, ProductCart } from '../types'
-import { loadCart, removeItemFromCart } from '../helper'
+import { OrderPayload as OrderMutation } from '../api/types'
 
 interface PageProps {
   session: SessionExtended
 }
 
 const Cart: NextPage<PageProps> = ({ session }) => {
+  const stripe = useStripe()
+  const elements = useElements()
+  const router = useRouter()
+  const order_mutation = useMutation<
+    AxiosResponse<any, any>,
+    AxiosError,
+    OrderMutation,
+    unknown
+  >((formData) => addOrderAPI(session.user.id, session.token, formData))
+
   const [products, setProducts] = useState<Array<ProductCart>>([])
 
   // remove item from cart
@@ -28,10 +44,40 @@ const Cart: NextPage<PageProps> = ({ session }) => {
     swal('Congrats', 'Item removed from cart', 'success')
   }
 
+  const handlePayment = async () => {
+    if (!stripe || !elements) return
+
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: 'card',
+      card: elements.getElement(CardElement) || { token: '' },
+    })
+
+    if (!error) {
+      const amount = products.reduce((acc, prod) => acc + prod.price, 0)
+      order_mutation.mutate({
+        products,
+        amount,
+        transaction_id: paymentMethod.id,
+      })
+    } else {
+      console.log(error.message)
+    }
+  }
+
   useEffect(() => {
     const products = loadCart()
     setProducts(products)
   }, [])
+
+  useEffect(() => {
+    if (order_mutation.data?.status === 200) {
+      cartEmpty()
+      order_mutation.reset()
+      swal('Congrats', 'Your order is placed', 'success').then(() => {
+        router.push('/dashboard')
+      })
+    }
+  }, [order_mutation])
 
   return (
     <>
@@ -60,9 +106,17 @@ const Cart: NextPage<PageProps> = ({ session }) => {
             ))}
 
           {products && products.length !== 0 && (
-            <Button colorScheme="green" m="4" rounded="full">
-              Proceed Checkout
-            </Button>
+            <Card>
+              <CardElement />
+              <Button
+                colorScheme="green"
+                mt="1"
+                rounded="full"
+                onClick={handlePayment}
+              >
+                Proceed Checkout
+              </Button>
+            </Card>
           )}
         </Container>
       </main>

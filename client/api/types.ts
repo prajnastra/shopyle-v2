@@ -36,3 +36,9 @@ export interface Products {
   createdAt: string
   updatedAt: string
 }
+
+export interface OrderPayload {
+  products: Array<Products>
+  amount: number | string
+  transaction_id: string
+}

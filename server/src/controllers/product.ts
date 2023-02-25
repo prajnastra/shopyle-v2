@@ -107,7 +107,7 @@ export const updateStock = (
   res: Response,
   next: NextFunction
 ) => {
-  let myOperations = req.body.order.products.map(
+  let myOperations = req.body.products.map(
     (prod: { _id: string; count: number }) => {
       return {
         updateOne: {

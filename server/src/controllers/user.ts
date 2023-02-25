@@ -70,15 +70,15 @@ export const pushOrderInPurchaseList = (
   if (!req.profile) return
 
   let purchases: Array<UserPurchase> = []
-  req.body.order.products.forEach((product: UserPurchase) => {
+  req.body.products.forEach((product: UserPurchase) => {
     purchases.push({
       _id: product._id,
       name: product.name,
       description: product.description,
       category: product.category,
-      quantity: product.quantity,
-      amount: req.body.order.amount,
-      transaction_id: req.body.order.transaction_id,
+      quantity: product?.count || 1,
+      price: product.price,
+      transaction_id: req.body.transaction_id,
     })
   })
 
